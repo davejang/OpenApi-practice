@@ -7,6 +7,9 @@ from urllib.parse import urlencode, quote_plus, unquote
 URL = "http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade"
 KEY = unquote("dqIMi/vYl2mR6ytgRoKFVb/4gs9WEVKyM+o6DDefNlImlXslZWwEYrVAxA/NaE/fMCc2/rSubecCbobfpX0ERA==")
 
+print("지역을 입력하세요(시/도)")
+area = input()
+
 print("지역코드를 입력하세요(법정동코드 앞 5자리)")
 lawd_cd = input()
 print("실거래연월을 입력하세요 (ex) 202101")
@@ -42,9 +45,6 @@ for i in range(0,row_len):
   apt_list.append(apt_info_list)
   apt_info_list = []
 
-
-
 if __name__ == '__main__':
   result = pd.DataFrame(apt_list, columns=attributes)
-  result.head()
-  print(result)
+  result.to_csv(f"아파트 실거래목록_{lawd_cd}_{deal_ymd}",mode='w')
